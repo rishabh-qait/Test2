@@ -32,7 +32,7 @@ public class WYSIWYGEditor {
 	
 	public void clear_And_Edit() 
 	{
-		//boolean check=false;
+		boolean check=false;
 		driver.switchTo().frame(0);
 		WebElement textbox=driver.findElement(By.xpath("//*[@id=\"tinymce\"]"));
 		textbox.click();
@@ -43,18 +43,17 @@ public class WYSIWYGEditor {
 		         .sendKeys(Keys.chord("A"))
 		         .keyUp(Keys.CONTROL)
 		         .perform();
-		//String colour = driver.findElement(By.className("mce-content-body")).getCssValue("color");
-		String fontWeight = driver.findElement(By.className("mce-content-body"))
-                .getCssValue("font-weight");
+		String colour = driver.findElement(By.className("mce-content-body")).getCssValue("color");
+		//String fontWeight = driver.findElement(By.className("mce-content-body")).getCssValue("font-weight");
 
-boolean isBold = "bold".equals(fontWeight) || "bolder".equals(fontWeight) || Integer.parseInt(fontWeight) >= 700;
+//boolean isBold = "bold".equals(fontWeight) || "bolder".equals(fontWeight) || Integer.parseInt(fontWeight) >= 700;
 		
 		driver.switchTo().defaultContent();
 		driver.findElement(By.xpath("//*[@id='mceu_3']")).click();
 		
-		//if(colour.contains("rgba(46,46,46,1)"))
-			//check=true;
-		//Assert.assertTrue(isBold);
+		if(colour.contains("rgba(0,0,0)"))
+			check=true;
+		Assert.assertTrue(check);
 	}
 	
 	
