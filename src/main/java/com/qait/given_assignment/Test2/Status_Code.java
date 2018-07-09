@@ -38,8 +38,14 @@ public void verifying_404_Msg_Displayed()
 	Assert.assertTrue(check);
 }
 	
-	
-	
-	
-
+public void verifying_404_Status_Code() 
+{
+	boolean check=false;
+	String text=driver.findElement(By.xpath("//*[@id=\"content\"]/div/p")).getText();
+	String status[] =text.split("\\s+");
+	System.out.println("status code is "+status[4]);
+	if (status[4].equals("404"))
+		check=true;
+	Assert.assertTrue(check);
+}	
 }
