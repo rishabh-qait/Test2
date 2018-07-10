@@ -9,6 +9,8 @@ import junit.framework.Assert;
 public class Status_Code {
 	
 	WebDriver driver;
+	String parentWindowHandler2;
+	String parentWindowHandler1;
 	Status_Code(WebDriver driver){
 		this.driver=driver;
 		
@@ -20,6 +22,15 @@ public class Status_Code {
 		
 	}
 public void verifying_Status_Code_Page_Displayed() {
+	 parentWindowHandler1 = driver.getWindowHandle(); // Store your parent window
+	String subWindowHandler = null;
+	Set<String> handles = driver.getWindowHandles(); // get all window handles
+	Iterator<String> iterator = handles.iterator();
+	while (iterator.hasNext())
+	{
+		subWindowHandler = iterator.next();
+	}
+	driver.switchTo().window(subWindowHandler);
 		
 		Assert.assertEquals("http://10.0.31.161:9292/status_codes",driver.getCurrentUrl());
 			
@@ -31,6 +42,15 @@ public  WebElement get_404_Code_link()
 }
 public void verifying_404_Msg_Displayed() 
 {
+	 parentWindowHandler2 = driver.getWindowHandle(); // Store your parent window
+	String subWindowHandler = null;
+	Set<String> handles = driver.getWindowHandles(); // get all window handles
+	Iterator<String> iterator = handles.iterator();
+	while (iterator.hasNext())
+	{
+		subWindowHandler = iterator.next();
+	}
+	driver.switchTo().window(subWindowHandler);
 	boolean check=false;
 	String text=driver.findElement(By.xpath("//*[@id=\"content\"]/div/p")).getText();
 	if (text.contains("404"))
@@ -48,4 +68,14 @@ public void verifying_404_Status_Code()
 		check=true;
 	Assert.assertTrue(check);
 }	
+	public void close_1() 
+{
+	driver.close();
+	driver.switchTo().window(parentWindowHandler2);
+}
+public void close_2() 
+{
+	driver.close();
+	driver.switchTo().window(parentWindowHandler1);
+}
 }
