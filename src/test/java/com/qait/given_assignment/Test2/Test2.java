@@ -53,6 +53,7 @@ public class Test2 {
 	{
 		//basicobj.get_Basic_Authlink().click();
 		basicobj.sending_Data_In_popup();
+		driver.navigate().back();
 		
 	}
 	@Test(priority=2)
