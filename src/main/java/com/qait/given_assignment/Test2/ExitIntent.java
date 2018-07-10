@@ -28,11 +28,38 @@ public class ExitIntent {
 		Assert.assertEquals("http://10.0.31.161:9292/exit_intent",driver.getCurrentUrl());
 			
 	} 
-	public void move_mouse() 
+	public void move_mouse() throws AWTException, InterruptedException 
 	{
-		Actions builder = new Actions(driver);
-		Action mouseover=builder.moveByOffset(0,50).build();
-		mouseover.perform();
+		
+		Robot rob = new Robot();
+		int xcor=500;
+        rob.mouseMove(xcor, 300);
+        Thread.sleep(2000);
+        rob.mouseMove(xcor, 100);
+       
+	
+	}
+	public void veriying_Modal_Window_Displayed() 
+	{
+		
+		boolean check=driver.findElement(By.xpath("//*[@id=\"ouibounce-modal\"]/div[2]")).isDisplayed();
+		Assert.assertTrue(check);
+		String text = driver.findElement(By.xpath("//*[@id=\"ouibounce-modal\"]/div[2]/div[1]")).getText();
+				Assert.assertEquals("THIS IS A MODAL WINDOW", text);
+		
+	}
+	public void verifying_Modal_Window_Disappears() throws AWTException, InterruptedException  
+	{
+		boolean check = true;
+		Robot rb = new Robot();
+		rb.mouseMove(50,150);
+	rb.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+	rb.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+		
+		Thread.sleep(2000);
+		 check=driver.findElement(By.xpath("//*[@id=\"ouibounce-modal\"]/div[2]")).isDisplayed();
+		Assert.assertFalse(check);
+		
 		
 	}
 	
