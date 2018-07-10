@@ -48,10 +48,10 @@ public class Test2 {
 		
 		
 	}
-	//@Test(priority=1)
+	@Test(priority=1)
 	public void test_case1() 
 	{
-		basicobj.get_Basic_Authlink().click();
+		//basicobj.get_Basic_Authlink().click();
 		basicobj.sending_Data_In_popup();
 		
 	}
