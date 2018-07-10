@@ -23,16 +23,19 @@ public class Basic_Auth {
 		return driver.findElement(By.linkText("Basic Auth"));
 		
 	}
-	public void sending_Data_In_popup() 
+	public void sending_Data_In_popup() throws InterruptedException 
 	{
-	Alert popup =	driver.switchTo().alert();
-
-	//rb.keyPress(KeyEvent.VK_r);
-	
-	 popup.setAuthenticationCredentials("admin", "admin");
-	
-		popup.accept();
+		boolean check=false;
+	Thread.sleep(2000);
+	String URL = "http://" + "admin" + ":" + "admin" + "@" + "10.0.31.161:9292/basic_auth";
+	driver.navigate().to(URL);
+	Thread.sleep(4000);
+	String text = driver.findElement(By.xpath("//*[@id=\"content\"]/div/p")).getText();
+	if (text.contains("Congratulations!"))
+	check=true;
+		Assert.assertTrue(check);
 	}
+	
 	
 	
 	
